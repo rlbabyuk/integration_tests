@@ -48,9 +48,13 @@ class EditPolicyEventAssignments(ControlExplorerView):
 
     @property
     def is_displayed(self):
+        title_name = VersionPick({
+            Version.lowest(): 'Editing {} {} Policy "{}" Event Assignments',
+            "5.9": 'Editing {} {} "{}" Event Assignments'
+        })
         return (
             self.in_control_explorer and
-            self.title.text == 'Editing {} {} Policy "{}" Event Assignments'.format(
+            self.title.text == title_name.format(
                 self.context["object"].PRETTY,
                 self.context["object"].TYPE,
                 self.context["object"].description
